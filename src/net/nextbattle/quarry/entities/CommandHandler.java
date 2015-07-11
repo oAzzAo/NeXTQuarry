@@ -58,7 +58,7 @@ public class CommandHandler implements CommandExecutor {
             }
 
             cs.sendMessage(ChatColor.GOLD + "----[NeXTQuarry Plugin Info]----");
-            cs.sendMessage(ChatColor.GOLD + "NeXTQuarry v2.0.0 - Coded by Furt");
+            cs.sendMessage(ChatColor.GOLD + "NeXTQuarry v2.0.0 - Coded by Furt & BeMacized");
             if (cs instanceof Player) {
                 Player p = (Player) cs;
                 cs.sendMessage(ChatColor.GOLD + "----[NeXTQuarry Permissions]----");
