@@ -125,7 +125,7 @@ public class WorldFunctions {
             }
         }
         } catch (Exception e) {
-        	((MainClass) MainClass.plugin).log("Could not process queue");
+        	chunkqueue.clear();
         }
     }
 }
