@@ -58,6 +58,10 @@ public class BlockLocation {
     }
     
     public boolean equals(BlockLocation bl) {
+    	if (bl == null) {
+    		return false;
+    	}
+    	
         if (bl.getWorld().equals(world) && bl.getX() == x && bl.getY() == y && bl.getZ() == z)
         {
             return true;

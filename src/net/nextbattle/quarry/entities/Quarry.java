@@ -135,7 +135,7 @@ public class Quarry {
     public static boolean isUpgradeBlock(Block b) {
         BlockLocation bl = new BlockLocation(b);
         for (Quarry q : quarrylist) {
-            if (q.upgrade_slot_1_bl == bl || q.upgrade_slot_2_bl == bl || q.upgrade_slot_3_bl == bl) {
+        	if (bl.equals(q.upgrade_slot_1_bl) || bl.equals(q.upgrade_slot_2_bl) || bl.equals(q.upgrade_slot_3_bl)) {
                 return true;
             }
         }
