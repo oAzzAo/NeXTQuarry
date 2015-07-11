@@ -1105,65 +1105,141 @@ public class Quarry {
 			for (int z = 0; z < holesize; z++) {
 				for (int y = 0; y <= (yvar + 5); y++) {
 					Location loc = null;
-		
+
 					if (dir == BlockFace.WEST || dir == BlockFace.NORTH_WEST) {
-						loc = new Location(world, block.getX() - x - 1, block.getY() + (5 - y), block.getZ() + z + 2);
-					} else if (dir == BlockFace.NORTH || dir == BlockFace.NORTH_EAST) {
-						loc = new Location(world, block.getX() - 2 - x, block.getY() + (5 - y), block.getZ() - z - 1);
-					} else if (dir == BlockFace.EAST || dir == BlockFace.SOUTH_EAST) {
-						loc = new Location(world, x + block.getX() + 1, block.getY() + (5 - y), block.getZ() - z - 2);
-					} else if (dir == BlockFace.SOUTH || dir == BlockFace.SOUTH_WEST) {
-						loc = new Location(world, x + block.getX() + 2, block.getY() + (5 - y), block.getZ() + z + 1);
+						loc = new Location(world, block.getX() - x - 1,
+								block.getY() + (5 - y), block.getZ() + z + 2);
+					} else if (dir == BlockFace.NORTH
+							|| dir == BlockFace.NORTH_EAST) {
+						loc = new Location(world, block.getX() - 2 - x,
+								block.getY() + (5 - y), block.getZ() - z - 1);
+					} else if (dir == BlockFace.EAST
+							|| dir == BlockFace.SOUTH_EAST) {
+						loc = new Location(world, x + block.getX() + 1,
+								block.getY() + (5 - y), block.getZ() - z - 2);
+					} else if (dir == BlockFace.SOUTH
+							|| dir == BlockFace.SOUTH_WEST) {
+						loc = new Location(world, x + block.getX() + 2,
+								block.getY() + (5 - y), block.getZ() + z + 1);
 					}
-					if ((x == xvar || z == zvar) && y == 0 && !(x == xvar && z == zvar)) {
-						if (x == xvar && z == zvar && y != 0 && y != (yvar + 5) && y != (yvar + 4)) {
-							if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
-								if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
-									if ((!MainClass.config.draw_all_beams && z != zvar) || (MainClass.config.draw_all_beams)) {	
-										WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
+					if ((x == xvar || z == zvar) && y == 0
+							&& !(x == xvar && z == zvar)) {
+						if (x == xvar && z == zvar && y != 0 && y != (yvar + 5)
+								&& y != (yvar + 4)) {
+							if (MainClass.ps.mayEditBlock(
+									getBlockAtSpot(xwork, ywork, zwork),
+									playername)) {
+								if (MainClass.ps.mayEditBlock(
+										getBlockAtSpot(xwork, ywork, zwork),
+										playername)) {
+									if ((!MainClass.config.draw_all_beams && z != zvar)
+											|| (MainClass.config.draw_all_beams)) {
+										WorldFunctions.queueBlock(
+												world.getBlockAt(loc),
+												Material.COBBLE_WALL.getId(),
+												(byte) 0);
 										ArmBlocks.add(new BlockLocation(loc));
-										MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
+										MainClass.ps.logPlacement(playername,
+												world.getBlockAt(loc)
+														.getLocation(), world
+														.getBlockAt(loc)
+														.getTypeId(), world
+														.getBlockAt(loc)
+														.getData());
 									} else {
 										return;
 									}
 
 								}
 								if (x == xvar && z == zvar && y == 0) {
-									if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
-										WorldFunctions.queueBlock(world.getBlockAt(loc), Material.IRON_BLOCK.getId(), (byte) 0);
+									if (MainClass.ps
+											.mayEditBlock(
+													getBlockAtSpot(xwork,
+															ywork, zwork),
+													playername)) {
+										WorldFunctions.queueBlock(
+												world.getBlockAt(loc),
+												Material.IRON_BLOCK.getId(),
+												(byte) 0);
 										ArmBlocks.add(new BlockLocation(loc));
-										MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
+										MainClass.ps.logPlacement(playername,
+												world.getBlockAt(loc)
+														.getLocation(), world
+														.getBlockAt(loc)
+														.getTypeId(), world
+														.getBlockAt(loc)
+														.getData());
 									} else {
 										return;
 									}
 								}
 
-								if (x == xvar && z == zvar && y != 0 && y != (yvar + 5) && y != (yvar + 4)) {
-									if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
-										WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
-					    	            ArmBlocks.add(new BlockLocation(loc));
-					    	            MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
+								if (x == xvar && z == zvar && y != 0
+										&& y != (yvar + 5) && y != (yvar + 4)) {
+									if (MainClass.ps
+											.mayEditBlock(
+													getBlockAtSpot(xwork,
+															ywork, zwork),
+													playername)) {
+										WorldFunctions.queueBlock(
+												world.getBlockAt(loc),
+												Material.COBBLE_WALL.getId(),
+												(byte) 0);
+										ArmBlocks.add(new BlockLocation(loc));
+										MainClass.ps.logPlacement(playername,
+												world.getBlockAt(loc)
+														.getLocation(), world
+														.getBlockAt(loc)
+														.getTypeId(), world
+														.getBlockAt(loc)
+														.getData());
 									} else {
 										return;
 
 									}
 								}
-								
+
 								if (x == xvar && z == zvar && y == (yvar + 5)) {
-									if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
-										WorldFunctions.queueBlock(world.getBlockAt(loc), Material.HOPPER.getId(), (byte) 0);
+									if (MainClass.ps
+											.mayEditBlock(
+													getBlockAtSpot(xwork,
+															ywork, zwork),
+													playername)) {
+										WorldFunctions.queueBlock(
+												world.getBlockAt(loc),
+												Material.HOPPER.getId(),
+												(byte) 0);
 										ArmBlocks.add(new BlockLocation(loc));
-										MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
+										MainClass.ps.logPlacement(playername,
+												world.getBlockAt(loc)
+														.getLocation(), world
+														.getBlockAt(loc)
+														.getTypeId(), world
+														.getBlockAt(loc)
+														.getData());
 									} else {
-										return;					                       
+										return;
 									}
 								}
-					                                          
+
 								if (x == xvar && z == zvar && y == (yvar + 4)) {
-									if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
-										WorldFunctions.queueBlock(world.getBlockAt(loc), Material.CAULDRON.getId(), (byte) 0);
+									if (MainClass.ps
+											.mayEditBlock(
+													getBlockAtSpot(xwork,
+															ywork, zwork),
+													playername)) {
+										WorldFunctions.queueBlock(
+												world.getBlockAt(loc),
+												Material.CAULDRON.getId(),
+												(byte) 0);
 										ArmBlocks.add(new BlockLocation(loc));
-										MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
+										MainClass.ps.logPlacement(playername,
+												world.getBlockAt(loc)
+														.getLocation(), world
+														.getBlockAt(loc)
+														.getTypeId(), world
+														.getBlockAt(loc)
+														.getData());
 									} else {
 										return;
 									}

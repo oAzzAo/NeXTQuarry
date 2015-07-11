@@ -10,19 +10,19 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 public class Factions {
-    public boolean mayEditBlock(Block b, String player) {
-        Player p = Bukkit.getServer().getPlayer(player);
-        if (p != null) {
-            FPlayer fp = FPlayers.i.get(p);
-            Faction faction = Board.getFactionAt(new FLocation(b.getLocation()));
-            if (faction.isNone()) {
-                return true;
-            }
-            if (faction.equals(fp.getFaction()))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+	public boolean mayEditBlock(Block b, String player) {
+		Player p = Bukkit.getServer().getPlayer(player);
+		if (p != null) {
+			FPlayer fp = FPlayers.i.get(p);
+			Faction faction = Board
+					.getFactionAt(new FLocation(b.getLocation()));
+			if (faction.isNone()) {
+				return true;
+			}
+			if (faction.equals(fp.getFaction())) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

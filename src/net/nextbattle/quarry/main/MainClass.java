@@ -16,115 +16,128 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class MainClass extends JavaPlugin {
 
-    public static Plugin plugin;
-    public static Configuration config;
-    public static CustomItems citems;
-    public static int timer;
-    public static int savetimer;
-    public static CommandHandler ch;
-    public static PluginSupport ps;
+	public static Plugin plugin;
+	public static Configuration config;
+	public static CustomItems citems;
+	public static int timer;
+	public static int savetimer;
+	public static CommandHandler ch;
+	public static PluginSupport ps;
 
-    public static void main(String[] args) {
-        System.out.println("NeXTQuarry is a plugin for MineCraft servers based on CraftBukkit.");
-        System.out.println("Please place NeXTQuarry.jar (this file) in the plugins directory of your CraftBukkit installation.");
-        System.out.println("You can then use it by launching the Craftbukkit server.");
-    }
-    
-    public void log(String s) {
-    	getLogger().log(Level.INFO, s);
-    }
+	public static void main(String[] args) {
+		System.out
+				.println("NeXTQuarry is a plugin for MineCraft servers based on CraftBukkit.");
+		System.out
+				.println("Please place NeXTQuarry.jar (this file) in the plugins directory of your CraftBukkit installation.");
+		System.out
+				.println("You can then use it by launching the Craftbukkit server.");
+	}
 
-    @Override
-    public void onEnable() {
-        //Define plugin
-        plugin = this;
+	public void log(String s) {
+		getLogger().log(Level.INFO, s);
+	}
 
-        //Event Listener
-        getServer().getPluginManager().registerEvents(new GeneralEventListener(), plugin);
+	@Override
+	public void onEnable() {
+		// Define plugin
+		plugin = this;
 
-        //Data Folders
-        if (!plugin.getDataFolder().exists()) {
-            plugin.getDataFolder().mkdir();
-        }
-        File quarrydir = new File(plugin.getDataFolder(), "/quarries");
-        if (!quarrydir.exists()) {
-            quarrydir.mkdir();
-        }
+		// Event Listener
+		getServer().getPluginManager().registerEvents(
+				new GeneralEventListener(), plugin);
 
-        //Initialize Command Handler
-        ch = new CommandHandler();
-        getCommand("nextquarry").setExecutor(ch);
+		// Data Folders
+		if (!plugin.getDataFolder().exists()) {
+			plugin.getDataFolder().mkdir();
+		}
+		File quarrydir = new File(plugin.getDataFolder(), "/quarries");
+		if (!quarrydir.exists()) {
+			quarrydir.mkdir();
+		}
 
-        //Config
-        if (!(new File(plugin.getDataFolder(), "config.yml")).exists()) {
-            plugin.saveDefaultConfig();
-        }
-        plugin.reloadConfig();
-        Configuration.loadConfig();
+		// Initialize Command Handler
+		ch = new CommandHandler();
+		getCommand("nextquarry").setExecutor(ch);
 
-        //Initialize Custom Items
-        citems = new CustomItems();
-        citems.addRecipes();
+		// Config
+		if (!(new File(plugin.getDataFolder(), "config.yml")).exists()) {
+			plugin.saveDefaultConfig();
+		}
+		plugin.reloadConfig();
+		Configuration.loadConfig();
 
-        //Plugin Support
-        ps = new PluginSupport();
+		// Initialize Custom Items
+		citems = new CustomItems();
+		citems.addRecipes();
 
-        //Updater
-        try {
-            Updater updater = null;
-            if (config.autoupdate) {
-                updater = new Updater(this, "nextquarry", this.getFile(), Updater.UpdateType.DEFAULT, true); //TODO: NOTIFY UPDATE BUT NO UPDATE FEATURE
-                Updater.updateResultCustom(updater);
-            } else if (config.autoupdate) {
-                updater = new Updater(this, "nextquarry", this.getFile(), Updater.UpdateType.NO_DOWNLOAD, true);
-                Updater.updateResultCustom(updater);
-            }
-        } catch (Exception e) {
-        }
+		// Plugin Support
+		ps = new PluginSupport();
 
+		// Updater
+		try {
+			Updater updater = null;
+			if (config.autoupdate) {
+				updater = new Updater(this, "nextquarry", this.getFile(),
+						Updater.UpdateType.DEFAULT, true); // TODO: NOTIFY
+															// UPDATE BUT NO
+															// UPDATE FEATURE
+				Updater.updateResultCustom(updater);
+			} else if (config.autoupdate) {
+				updater = new Updater(this, "nextquarry", this.getFile(),
+						Updater.UpdateType.NO_DOWNLOAD, true);
+				Updater.updateResultCustom(updater);
+			}
+		} catch (Exception e) {
+		}
 
-        //Load Quarries
-        File dir = new File(plugin.getDataFolder(), "/quarries");
-        for (File child : dir.listFiles()) {
-            Quarry.LoadQuarry(child);
-        }
+		// Load Quarries
+		File dir = new File(plugin.getDataFolder(), "/quarries");
+		for (File child : dir.listFiles()) {
+			Quarry.LoadQuarry(child);
+		}
 
-        //Plugin Metrics
-        if (config.send_usage_data) {
-            try {
-                Metrics metrics = new Metrics(this);
-                Metrics.initMetrics(metrics);
-                metrics.start();
-            } catch (IOException e) {
-            }
-        }
+		// Plugin Metrics
+		if (config.send_usage_data) {
+			try {
+				Metrics metrics = new Metrics(this);
+				Metrics.initMetrics(metrics);
+				metrics.start();
+			} catch (IOException e) {
+			}
+		}
 
-        //Main Timer
-        timer = getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
-            @Override
-            public void run() {
-                for (Quarry q : Quarry.quarrylist) {
-                    q.doTick();
-                }
-            }
-        }, 0, 5L);
+		// Main Timer
+		timer = getServer().getScheduler().scheduleSyncRepeatingTask(this,
+				new Runnable() {
+					@Override
+					public void run() {
+						for (Quarry q : Quarry.quarrylist) {
+							q.doTick();
+						}
+					}
+				}, 0, 5L);
 
-        savetimer = getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
-            @Override
-            public void run() {
-                getServer().getLogger().log(Level.INFO, "NeXTQuarry: Saving quarries...");
-                Quarry.saveAll();
-                getServer().getLogger().log(Level.INFO, "NeXTQuarry: All quarries saved.");
-            }
-        }, 20L*(config.save_interval), 20L*(config.save_interval));
-    }
+		savetimer = getServer().getScheduler().scheduleSyncRepeatingTask(this,
+				new Runnable() {
+					@Override
+					public void run() {
+						getServer().getLogger().log(Level.INFO,
+								"NeXTQuarry: Saving quarries...");
+						Quarry.saveAll();
+						getServer().getLogger().log(Level.INFO,
+								"NeXTQuarry: All quarries saved.");
+					}
+				}, 20L * (config.save_interval), 20L * (config.save_interval));
+	}
 
-    @Override
-    public void onDisable() {
-        getServer().getScheduler().cancelTask(timer);
-        getServer().getScheduler().cancelTask(savetimer);
-        getServer().getLogger().log(Level.INFO, "NeXTQuarry: Saving quarries...");
-        Quarry.saveAll();
-        getServer().getLogger().log(Level.INFO, "NeXTQuarry: All quarries saved.");
-    }
+	@Override
+	public void onDisable() {
+		getServer().getScheduler().cancelTask(timer);
+		getServer().getScheduler().cancelTask(savetimer);
+		getServer().getLogger().log(Level.INFO,
+				"NeXTQuarry: Saving quarries...");
+		Quarry.saveAll();
+		getServer().getLogger().log(Level.INFO,
+				"NeXTQuarry: All quarries saved.");
+	}
 }
