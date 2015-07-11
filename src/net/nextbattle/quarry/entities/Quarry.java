@@ -478,16 +478,22 @@ public class Quarry {
 
 		// Make sure quarry block is still there
 		if (tier == 0) {
-			WorldFunctions.queueBlock(block.getBlock(),
-					Material.IRON_BLOCK.getId(), (byte) 0);
+			if (!block.getBlock().getType().equals(Material.IRON_BLOCK)) {
+				WorldFunctions.queueBlock(block.getBlock(),
+						Material.IRON_BLOCK.getId(), (byte) 0);
+			}
 		}
 		if (tier == 1) {
-			WorldFunctions.queueBlock(block.getBlock(),
-					Material.GOLD_BLOCK.getId(), (byte) 0);
+			if (!block.getBlock().getType().equals(Material.GOLD_BLOCK)) {
+				WorldFunctions.queueBlock(block.getBlock(),
+						Material.GOLD_BLOCK.getId(), (byte) 0);
+			}
 		}
 		if (tier == 2) {
-			WorldFunctions.queueBlock(block.getBlock(),
-					Material.OBSIDIAN.getId(), (byte) 0);
+			if (!block.getBlock().getType().equals(Material.OBSIDIAN)) {
+				WorldFunctions.queueBlock(block.getBlock(),
+						Material.OBSIDIAN.getId(), (byte) 0);
+			}
 		}
 
 		// Reset upgrade slots
