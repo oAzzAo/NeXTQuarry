@@ -8,11 +8,13 @@ import com.sk89q.worldguard.protection.flags.RegionGroupFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag.State;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -29,7 +31,8 @@ public class WorldGuard {
         return (WorldGuardPlugin) plugin;
     }
 
-    public static <ProtectedRegion> List<ProtectedRegion> copyIterator(Iterator<ProtectedRegion> iter) {
+    @SuppressWarnings("hiding")
+	public static <ProtectedRegion> List<ProtectedRegion> copyIterator(Iterator<ProtectedRegion> iter) {
         List<ProtectedRegion> copy = new ArrayList<ProtectedRegion>();
         while (iter.hasNext()) {
             copy.add(iter.next());

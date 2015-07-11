@@ -68,6 +68,8 @@ public class Updater {
             case UPDATE_AVAILABLE:
             Bukkit.getServer().broadcastMessage(ChatColor.BOLD + "" + ChatColor.AQUA + "A new update for NeXTQuarry is available!");
                 Bukkit.getServer().broadcastMessage(ChatColor.BOLD + "" + ChatColor.AQUA + "Please download and install the new version of NeXTQuarry to update.");
+		default:
+			break;
         }
     }
 

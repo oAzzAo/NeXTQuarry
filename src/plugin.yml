@@ -1,8 +1,8 @@
 name: NeXTQuarry
 main: net.nextbattle.quarry.main.MainClass
-version: 1.5.1
+version: 2.0.0
 description: Adds quarries to vanilla minecraft
-author: BeMacized
+authors: [Furt, BeMacized]
 permissions:
    nextquarry.user.*:
      description: Gives all user permissions for NeXTQuarry.

@@ -10,6 +10,7 @@ import net.nextbattle.quarry.entities.Quarry;
 import net.nextbattle.quarry.metrics.Metrics;
 import net.nextbattle.quarry.support.PluginSupport;
 import net.nextbattle.quarry.updater.Updater;
+
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -27,6 +28,10 @@ public final class MainClass extends JavaPlugin {
         System.out.println("NeXTQuarry is a plugin for MineCraft servers based on CraftBukkit.");
         System.out.println("Please place NeXTQuarry.jar (this file) in the plugins directory of your CraftBukkit installation.");
         System.out.println("You can then use it by launching the Craftbukkit server.");
+    }
+    
+    public void log(String s) {
+    	getLogger().log(Level.INFO, s);
     }
 
     @Override

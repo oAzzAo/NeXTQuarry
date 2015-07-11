@@ -5,11 +5,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+
 import net.nextbattle.quarry.functions.PlayerFunctions;
 import net.nextbattle.quarry.functions.StringFunctions;
 import net.nextbattle.quarry.functions.WorldFunctions;
 import net.nextbattle.quarry.main.MainClass;
 import net.nextbattle.quarry.types.BlockLocation;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
@@ -112,7 +114,7 @@ public class Quarry {
                 ArmBlocks_temp.add(new BlockLocation(Bukkit.getServer().getWorld(list.get(i).toString().split("\\$")[0]).getBlockAt(new Location(Bukkit.getServer().getWorld(list.get(i).toString().split("\\$")[0]), Integer.parseInt(list.get(i).toString().split("\\$")[1]), Integer.parseInt(list.get(i).toString().split("\\$")[2]), Integer.parseInt(list.get(i).toString().split("\\$")[3])))));
             }
         }
-        ArrayList<BlockLocation> QuarryBlocks_temp = new ArrayList<>();
+        ArrayList<BlockLocation> QuarryBlocks_temp = new ArrayList<BlockLocation>();
         list = fc_temp.getList("quarryblocks");
         if (list != null) {
             for (int i = 0; i < list.size(); i++) {
@@ -127,7 +129,7 @@ public class Quarry {
         String block_serialized = fc_temp.getString("block");
         block_temp = Bukkit.getServer().getWorld(block_serialized.split("\\$")[0]).getBlockAt(new Location(Bukkit.getServer().getWorld(block_serialized.split("\\$")[0]), Integer.parseInt(block_serialized.split("\\$")[1]), Integer.parseInt(block_serialized.split("\\$")[2]), Integer.parseInt(block_serialized.split("\\$")[3])));
         BlockLocation block_temp_loc = new BlockLocation(block_temp);
-        Quarry quarry = new Quarry(fuel_inv_temp, upgr_inv_temp, dir_temp, tier_temp, block_temp_loc, player_temp, ArmBlocks_temp, QuarryBlocks_temp, xwork_temp, ywork_temp, zwork_temp, xrealwork_temp, yrealwork_temp, zrealwork_temp, active_temp, fuelcounter_temp, nextTick_temp, buildTick_temp, loadfile.getName().replace(".nxtb", ""));
+        new Quarry(fuel_inv_temp, upgr_inv_temp, dir_temp, tier_temp, block_temp_loc, player_temp, ArmBlocks_temp, QuarryBlocks_temp, xwork_temp, ywork_temp, zwork_temp, xrealwork_temp, yrealwork_temp, zrealwork_temp, active_temp, fuelcounter_temp, nextTick_temp, buildTick_temp, loadfile.getName().replace(".nxtb", ""));
     }
 
     public static boolean isUpgradeBlock(Block b) {
@@ -393,22 +395,22 @@ public class Quarry {
         return upgrades;
     }
 
-    public void doTick() {
+    @SuppressWarnings("deprecation")
+	public void doTick() {
         //Tick Checks
         if (!cantick) {
             return;
         }
-
         //Continue when owner is offline, or is located in unloaded chunk
         if (!block.getBlock().getChunk().isLoaded() && !MainClass.config.continue_when_unloaded) {
-            return;
+        	return;
         }
         if (Bukkit.getServer().getPlayer(playername) != null) {
             if (!Bukkit.getServer().getPlayer(playername).isOnline() && !MainClass.config.continue_when_offline) {
-                return;
+            	return;
             }
         } else if (!MainClass.config.continue_when_offline) {
-            return;
+        	return;
         }
 
         //Make sure quarry block is still there
@@ -647,7 +649,8 @@ public class Quarry {
         return world.getBlockAt(loc);
     }
 
-    public boolean mineStep() {
+    @SuppressWarnings("deprecation")
+	public boolean mineStep() {
         if (!active) {
             return false;
         }
@@ -757,7 +760,8 @@ public class Quarry {
         return true;
     }
 
-    public void drawArm() {
+    @SuppressWarnings("deprecation")
+	public void drawArm() {
         int xvar = xwork;
         int yvar = ywork;
         int zvar = zwork;
@@ -1132,7 +1136,8 @@ public class Quarry {
         return contains;
     }
 
-    public boolean buildFrame(boolean edit) {
+    @SuppressWarnings("deprecation")
+	public boolean buildFrame(boolean edit) {
         if (dir == BlockFace.NORTH || dir == BlockFace.NORTH_EAST) {
             int holesize = 0;
             if (tier == 0) {
@@ -1418,7 +1423,8 @@ public class Quarry {
         return true;
     }
 
-    public Quarry delete() {
+    @SuppressWarnings("deprecation")
+	public Quarry delete() {
         cantick = false;
 
         quarrylist.remove(this);

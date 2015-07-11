@@ -3,7 +3,9 @@ package net.nextbattle.quarry.entities;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import net.nextbattle.quarry.main.MainClass;
+
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -36,8 +38,10 @@ public class Configuration {
     public int user_max_quarries = 24;
     public int save_interval = 60;
 
-    public static void loadConfig() {
-        FileConfiguration fc = new YamlConfiguration().loadConfiguration(new File(MainClass.plugin.getDataFolder(), "config.yml"));
+    @SuppressWarnings("deprecation")
+	public static void loadConfig() {
+        FileConfiguration fc = YamlConfiguration.loadConfiguration(new File(MainClass.plugin.getDataFolder(), "config.yml"));
+        
         MainClass.config = new Configuration(false);
         List<?> list = fc.getList("ignored-blocks");
         if (list != null) {

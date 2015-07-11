@@ -23,7 +23,7 @@ user-max-quarries: 24
 
 # -- PLUGIN OPTIONS --
 #Auto Update: Makes sure the plugin updates automatically when there's an update available.
-auto-update: true
+auto-update: false
 #Update Notifications: Gives you a notification when there's a new update available.
 #NOTE: Only works when auto update is turned off!
 update-notify: false
