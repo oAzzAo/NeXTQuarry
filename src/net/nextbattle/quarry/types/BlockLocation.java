@@ -1,5 +1,7 @@
 package net.nextbattle.quarry.types;
 
+import java.util.Objects;
+
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -55,15 +57,22 @@ public class BlockLocation {
 		return world.getBlockAt(getLocation());
 	}
 
-	public boolean equals(BlockLocation bl) {
-		if (bl == null) {
-			return false;
-		}
-
-		if (bl.getWorld().equals(world) && bl.getX() == x && bl.getY() == y
-				&& bl.getZ() == z) {
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
 		}
-		return false;
+		if (!(obj instanceof BlockLocation)) {
+			return false;
+		}
+		BlockLocation bl = (BlockLocation) obj;
+		return x == bl.x && y == bl.y && z == bl.z
+				&& Objects.equals(world == null ? null : world.getName(),
+						bl.world == null ? null : bl.world.getName());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(world == null ? null : world.getName(), x, y, z);
 	}
 }

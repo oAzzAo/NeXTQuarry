@@ -3,6 +3,9 @@ main: net.nextbattle.quarry.main.MainClass
 version: 2.0.0
 description: Adds quarries to vanilla minecraft
 authors: [Furt, BeMacized]
+api-version: "1.21"
+folia-supported: true
+softdepend: [WorldGuard, Factions, Residence, CoreProtect, LogBlock]
 permissions:
    nextquarry.user.*:
      description: Gives all user permissions for NeXTQuarry.
@@ -26,8 +29,7 @@ permissions:
      description: Allows the user to remove quarries.
    nextquarry.user.edit:
      description: Allows the user to edit quarries (Upgrades & Fuel).
-     
 commands:
-   nextquarry:
-     description: Gives info on the NextQuarry plugin.
-     usage: /nextquarry
+  nextquarry:
+    description: NeXTQuarry commands
+    usage: /nextquarry [reload|give|debug visuals]

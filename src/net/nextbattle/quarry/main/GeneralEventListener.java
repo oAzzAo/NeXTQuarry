@@ -100,9 +100,9 @@ public class GeneralEventListener implements Listener {
 	public void onPlayerUse(PlayerInteractEvent evt) {
 		Player p = evt.getPlayer();
 		Quarry.saveAll();
-		if (p.getItemInHand() != null) {
-			if (p.getItemInHand().equals(MainClass.citems.wrench_tool)
-					&& evt.getAction() == Action.RIGHT_CLICK_BLOCK) {
+        if (p.getInventory().getItemInMainHand() != null) {
+            if (p.getInventory().getItemInMainHand().equals(MainClass.citems.wrench_tool)
+                        && evt.getAction() == Action.RIGHT_CLICK_BLOCK) {
 				Quarry q = Quarry.isActualQuarry(evt.getClickedBlock());
 				if (q != null) {
 					if (!p.hasPermission("nextquarry.user.remove")
@@ -123,8 +123,8 @@ public class GeneralEventListener implements Listener {
 				}
 				return;
 			}
-			if (p.getItemInHand().equals(MainClass.citems.fuel_tool)
-					&& evt.getAction() == Action.RIGHT_CLICK_BLOCK) {
+            if (p.getInventory().getItemInMainHand().equals(MainClass.citems.fuel_tool)
+                        && evt.getAction() == Action.RIGHT_CLICK_BLOCK) {
 				Quarry q = Quarry.isActualQuarry(evt.getClickedBlock());
 				if (q != null) {
 					if (!p.hasPermission("nextquarry.user.edit")

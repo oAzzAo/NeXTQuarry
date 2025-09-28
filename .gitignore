@@ -1,2 +1,4 @@
 /build/
 /dist/
+.gradle/
+.DS_Store

@@ -7,8 +7,10 @@
 private-quarries: true
 #Ignore Blocks: All blocktypes in this list can't be mined by a quarry. IMPORTANT: Removing the liquids from this list, may lag or crash your server!
 ignored-blocks:
-- '7'
-- '49' 
+- BEDROCK
+- OBSIDIAN 
+- WATER
+- LAVA
 
 #Global Max Quarries: The maximum amount of quarries in the whole server (nextquarry.admin bypasses this feature)
 global-max-quarries: 256
@@ -30,6 +32,23 @@ update-notify: false
 #Save Interval: The interval in seconds in between saves.
 #NOTE: It is highly recommended to only use values above 10 seconds.
 save-interval: 60
+ 
+# Visual updates: enable physics only for certain blocks to improve rendering.
+# When true, cobblestone walls will connect seamlessly.
+visual-physics-updates: true
+
+# Delay (in ticks) between clearing the arm and drawing it.
+# Helps avoid render/timing issues on busy servers.
+arm-draw-delay-ticks: 1
+
+# Client-side visual fallback for the arm center column and hopper.
+# Visuals: Quarry arm uses animated BlockDisplays (always on). Legacy modes removed.
+visuals:
+  refresh-ticks: 20
+
+# Debug options
+debug:
+  visuals: false
 
 # -- ANTI-LAG OPTIONS --
 #Continue when unloaded: If set to false, quarries will not do anything when they are in an unloaded chunk.
@@ -50,14 +69,14 @@ send-usage-data: true
 #Assign custom id's to the items specific for this plugin - Quarry blocks are not configurable.
 #These are set to their recommended values. It is highly adviced not to change them.
 #WARNING: If these items are changed, the currently crafted ones won't change to the new items, and will lose their functionality.
-speed_upgrade: 347
-wrench_tool: 369
-fuel_tool: 325
-fuel_finder_upgrade: 96
-chest_miner: 286
-fuel_efficiency_upgrade: 120
-smelter_upgrade: 61
-liquid_miner: 154
+speed_upgrade: CLOCK
+wrench_tool: BLAZE_ROD
+fuel_tool: BUCKET
+fuel_finder_upgrade: OAK_TRAPDOOR
+chest_miner: GOLDEN_AXE
+fuel_efficiency_upgrade: END_PORTAL_FRAME
+smelter_upgrade: FURNACE
+liquid_miner: HOPPER
  
 # -- WORLD OPTIONS --
 #World whitelist enabled: If set to true, quarries will only be placable in worlds listed in the worlds whitelist.
@@ -65,4 +84,3 @@ world-whitelist-enabled: false
 #World whitelist: List all worlds here in which quarries are placable. Only works if it is enabled in the "world-whitelist-enabled" option.
 world-whitelist:
 - 'world'
-
